@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <title>Frontend Mentor | Advice generator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap');
+    *{
+      font-family: 'Manrope', sans-serif;
+    }
+    .attribution { font-size: 11px; text-align: center;display: none;}
+    .attribution a { color: hsl(228, 45%, 44%); }
+    body{
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: hsl(218, 23%, 16%);
+      overflow: hidden;
+      position: relative;
+    }
+    .container{
+      width: 40%;
+      height: 42%;
+      margin-top: 14%;
+      margin-left:  30%;
+      background-color:hsl(217, 19%, 24%) ;
+      border-radius: 25px;
+      position: relative;
+    }
+    .content{
+      text-align: center;
+      width: 80%;
+      margin-left: 10%;
+      height: 100%;
+      position: relative;
+    }
+    .container_btn{
+      width: 100%;
+      position: absolute;
+      bottom: -30px;
+
+    }
+    .btn_get_advise{
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background-color: hsl(150, 100%, 66%);
+      cursor: pointer;
+    }
+    .btn_get_advise img{
+      width: 24px;
+      height: 24px;
+    }
+    .btn_get_advise:hover{
+      box-shadow: 0px 0px 25px 0px hsl(150, 100%, 66%);
+    }
+    .title{
+      padding-top: 10%;
+      color: hsl(150, 100%, 66%);
+      letter-spacing: 3px;
+    }
+    .quote{
+      padding-top: 7%;
+      font-size: 28px;
+      color:hsl(193, 38%, 86%);
+      max-height: 40%;
+    }
+    .end_line{
+      margin-top: 7%;
+    }
+    .mobile{
+      display: none;
+    }
+    @media screen and (max-width: 375px) {
+      .container{
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 25vh;
+        height: 40vh;
+      }
+      .content{
+        width: 90%;
+        margin-left: 5%;
+      }
+      .mobile{
+        display: block;
+      }
+      .desktop{
+        display: none;
+      }
+      .quote{
+        font-size: 24px;
+        max-height: 45%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="content">
+      <div class="title">Advice # <span class="advice_id">117</span></div>
+      <div class="quote">
+      </div>
+      <div class="end_line desktop">
+        <img src="./images/pattern-divider-desktop.svg" alt="">
+      </div>
+      <div class="end_line mobile">
+        <img src="./images/pattern-divider-mobile.svg" alt="">
+      </div>
+      <div class="container_btn">
+        <button class="btn_get_advise">
+          <img src="./images/icon-dice.svg" alt="">
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://github.com/ctqhbn/">Ha Ngoc Sang</a>.
+  </div>
+
+</body>
+<script>
+  function getAdvise() {
+    let url = "https://api.adviceslip.com/advice";
+    $.ajax({
+          url: url,
+          type: 'GET',
+          dataType: 'json', // added data type
+          success: function(res) {
+              $('.advice_id').text(res.slip.id);
+              $('.quote').text(res.slip.advice);
+          }
+      });
+  }
+  $( document ).ready(function() {
+    getAdvise()
+  });
+
+  $( ".container_btn" ).on( "click", function() {
+      getAdvise()
+    });
+
+
+</script>
+</html>
