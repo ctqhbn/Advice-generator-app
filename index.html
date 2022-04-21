@@ -132,6 +132,7 @@
 
 </body>
 <script>
+  var myTimeout;
   function getAdvise() {
     let url = "https://api.adviceslip.com/advice";
     $.ajax({
@@ -140,18 +141,18 @@
           dataType: 'json', // added data type
           success: function(res) {
               $('.advice_id').text(res.slip.id);
-              $('.quote').text(res.slip.advice);
+              $('.quote').text('"'+res.slip.advice+'"');
           }
-      });
+    });
+    myTimeout = window.setTimeout(getAdvise, 15000);
   }
   $( document ).ready(function() {
     getAdvise()
   });
-
   $( ".container_btn" ).on( "click", function() {
-      getAdvise()
+      window.clearTimeout(myTimeout);
+      myTimeout = window.setTimeout(getAdvise, 15000);
     });
-
 
 </script>
 </html>
