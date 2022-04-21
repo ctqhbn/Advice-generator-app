@@ -133,6 +133,7 @@
 </body>
 <script>
   var myTimeout;
+  var time = 30000;
   function getAdvise() {
     let url = "https://api.adviceslip.com/advice";
     $.ajax({
@@ -144,14 +145,14 @@
               $('.quote').text('"'+res.slip.advice+'"');
           }
     });
-    myTimeout = window.setTimeout(getAdvise, 15000);
+    myTimeout = window.setTimeout(getAdvise, time);
   }
   $( document ).ready(function() {
     getAdvise()
   });
   $( ".container_btn" ).on( "click", function() {
       window.clearTimeout(myTimeout);
-      myTimeout = window.setTimeout(getAdvise, 15000);
+      myTimeout = window.setTimeout(getAdvise, time);
     });
 
 </script>
